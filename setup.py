@@ -10,7 +10,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "selenium",
-        "boto.s3",
+        "boto3",
         "xmltodict",
         "google-api-python-client",
         "oauth2client",
