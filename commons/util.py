@@ -2,6 +2,7 @@
 
 import xmltodict
 import json
+from dateutil import parser, tz
 
 
 def find_list_of_dict(list_of_dict, key, value):
@@ -35,3 +36,11 @@ def check_list_values_not_in_dict(l, map):
 
 def get_list_values_from_dict(l, map):
     return dict(filter(lambda x: x[1] in l, map.items()))
+
+
+def convert_datetime_timezone(time_str, source_timezone, target_timezone):
+    source_zone = tz.gettz(source_timezone)
+    target_zone = tz.gettz(target_timezone)
+    org_time = parser.parse(time_str)
+    org_time = org_time.replace(tzinfo=source_zone)
+    return org_time.astimezone(target_zone)
