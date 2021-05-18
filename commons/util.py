@@ -2,6 +2,7 @@
 
 import xmltodict
 import json
+from dateutil import parser, tz
 
 
 def find_list_of_dict(list_of_dict, key, value):
@@ -46,3 +47,11 @@ def get_data_from_map(row, map):
         if v in row:
             ret_data[k] = row[v]
     return ret_data
+
+
+def convert_datetime_timezone(time_str, source_timezone, target_timezone):
+    source_zone = tz.gettz(source_timezone)
+    target_zone = tz.gettz(target_timezone)
+    org_time = parser.parse(time_str)
+    org_time = org_time.replace(tzinfo=source_zone)
+    return org_time.astimezone(target_zone)
