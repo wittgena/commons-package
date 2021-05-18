@@ -30,12 +30,8 @@ def xmltojson(xml):
 
 def check_list_values_not_in_dict(l, map):
     necessary_items = [v for k, v in map.items() if v not in l]
-
-    if necessary_items:
-        return False, ', '.join(necessary_items)
-
-    return True, ''
+    return False, ', '.join(necessary_items) if necessary_items else True, ''
 
 
 def get_list_values_from_dict(l, map):
-	return dict(filter(lambda x: x[1] in l, map.items()))
+    return dict(filter(lambda x: x[1] in l, map.items()))
