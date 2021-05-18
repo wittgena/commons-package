@@ -25,24 +25,13 @@ def xmltojson(xml):
         res = json.loads(res)
         return res
     except Exception:
-        logger.exception('')
         return {}
 
 
-def check_map(row, map):
-    necessary_items = []
-    for k, v in map.items():
-        if v not in row:
-            necessary_items.append(v)
-
-    if necessary_items:
-        return False, ', '.join(necessary_items)
-    return True, ''
+def check_list_values_not_in_dict(l, map):
+    necessary_items = [v for k, v in map.items() if v not in l]
+    return False, ', '.join(necessary_items) if necessary_items else True, ''
 
 
-def get_data_from_map(row, map):
-    ret_data = {}
-    for k, v in map.items():
-        if v in row:
-            ret_data[k] = row[v]
-    return ret_data
+def get_list_values_from_dict(l, map):
+    return dict(filter(lambda x: x[1] in l, map.items()))
