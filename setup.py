@@ -14,6 +14,7 @@ setup(
         "xmltodict",
         "google-api-python-client",
         "oauth2client",
-        "openpyxl"
+        "openpyxl",
+        "dropbox"
     ]
 )
