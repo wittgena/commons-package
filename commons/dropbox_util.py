@@ -78,6 +78,13 @@ class DropboxApi:
                 else:
                     traceback.print_exc('')
 
+    def create_folder(self, base):
+        try:
+            if not self.__dbx.files_get_metadata(base):
+                self.__dbx.files_create_folder_v2(base)
+        except:
+            traceback.print_exc('backup_file_to_dropbox files_get_metadata error')
+
 
 if __name__ == '__main__':
     token = os.environ.get('DROPBOX_API_TOKEN')
