@@ -63,10 +63,9 @@ class DropboxApi:
             base, filename = os.path.split(backup_path)
 
             try:
-                if not self.__dbx.files_get_metadata(base):
-                    self.__dbx.files_create_folder_v2(base)
+                self.__dbx.files_get_metadata(base)
             except:
-                traceback.print_exc('backup_file_to_dropbox files_get_metadata error')
+                self.__dbx.files_create_folder_v2(base)
 
             try:
                 self.__dbx.files_upload(f.read(), backup_path, mode=WriteMode('overwrite'))
@@ -80,10 +79,9 @@ class DropboxApi:
 
     def create_folder(self, base):
         try:
-            if not self.__dbx.files_get_metadata(base):
-                self.__dbx.files_create_folder_v2(base)
+            self.__dbx.files_get_metadata(base)            
         except:
-            traceback.print_exc('backup_file_to_dropbox files_get_metadata error')
+            self.__dbx.files_create_folder_v2(base)
 
 
 if __name__ == '__main__':
@@ -92,9 +90,3 @@ if __name__ == '__main__':
 
     print('test - 폴더 리스트 출력')
     print(api.get_folder_entries(''))
-
-    print('test - "farmsplan"폴더 파일 리스트 출력')
-    print(api.get_folder_entries('/farmsplan'))
-
-    print('test - "farmsplan" 폴더에 오늘날짜 폴더 생성')
-    print(api.get_folder_entries('/farmsplan'))
